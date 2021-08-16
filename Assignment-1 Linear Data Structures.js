@@ -168,26 +168,25 @@ function getOpp(char){
     }
     return null
 }
-function isBrackesClosed(string){
+function isBrackesClosed(codeSnippet){
     var result = true;
     var tempArr = []
-    if(string.length % 2 > 0){
-        return false;
-    }
-    for(var i = 0; i < string.length; i++){
-        if(string[i] === "{" || string[i] === "(" || string[i] === "[" ){
-            tempArr.push(string[i]);
-        }else{
+    
+    for(var i = 0; i < codeSnippet.length; i++){
+        if(codeSnippet[i] === "{" || codeSnippet[i] === "(" || codeSnippet[i] === "[" ){
+            tempArr.push(codeSnippet[i]);
+        }else if(codeSnippet[i] === "}" || codeSnippet[i] === ")" || codeSnippet[i] === "]" ){
             var char = getOpp(tempArr.pop())
-            if(string[i]  !== char){
+            if(codeSnippet[i]  !== char){
                 return false;
             }
         }
     }
     return result;
 }
-var bracketStringOne = "{[]{()()}[]}"
-var bracketStringTwo = "{[]{()()}[](})"
+var codeSnippetOne = "function printTable(n){console.log(\"Table of\",n,\"is\":-); for(var i = 0; i<n; i++){console.log(n,\" * \",i+1,\" = \",n*i+1)}}"
+var codeSnippetTwo = "function printTable(n){console.log(\"Table of\",n,\"is\":-); for(var i = 0; i<n; i++){console.log n,\" * \",i+1,\" = \",n*i+1)}}"
+
 console.log(isBrackesClosed(bracketStringOne))
 console.log(isBrackesClosed(bracketStringTwo))
 
